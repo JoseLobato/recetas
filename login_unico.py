@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!../flask/bin/python
 
 from functools import wraps
 from flask import Flask, request, redirect, render_template, session, url_for, flash
