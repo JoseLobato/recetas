@@ -1,8 +1,8 @@
-#!venv/bin/python
+#!../flask/bin/python
 
 
 import os 
-from flask import Flask, request, redirect, url_for, send_from_directory
+from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from werkzeug import secure_filename
 
 # ruta completa a la carpeta en donde se guardaran los ficheros
@@ -25,21 +25,9 @@ def upload_file():
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 			return redirect(url_for('uploaded_file', filename=filename))
 									
-	return """
-	<!doctype html>
-	<html>
-		<head>
-			<title>Upload new File</title>	
-		</head>
-			<h1>Upload new File</h1>
-			<form action="" method="post" enctype="multipart/form-data">
-			<div id="uploader">
-			    <p><input type="file" name="file"></p>
-				<input type="submit" value="Upload">
-			</div>
-			</form>
-	</html>
-	"""
+	return render_template('index.html')
+	
+	
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):  # muestra el fichero en el navegador
 	return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
