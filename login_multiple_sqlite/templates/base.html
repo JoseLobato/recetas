@@ -1,0 +1,16 @@
+<!doctyple>
+<html>
+	<head>
+		<title>{% block title %}Bienvenido{% endblock %} | Mi web</title>
+	</head>
+	<h1>Mi web</h1>
+	  <div class=navigation>
+	  {% if g.user %}
+		<a href="{{ url_for('logout') }}">Salir [{{ g.user.username }}]</a>
+	  {% else %}
+		<a href="{{ url_for('register') }}">Registrarse</a> |
+		<a href="{{ url_for('login') }}">Entrar</a>
+	  {% endif %}
+  </div>
+	{% block body %} {% endblock %}
+</html>
